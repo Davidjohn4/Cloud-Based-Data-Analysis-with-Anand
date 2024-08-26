@@ -1,0 +1,51 @@
+Q1) How to find duplicate in a given table
+Ans) Select emp_id,count(1) 
+from emp 
+having count(1)>1
+
+Q2) how to delete duplicate
+with cte as
+(
+Select *,row_number() over(partition by emp_id order by emp_id) as rn
+from emp1
+) delete from cte where rn>1
+
+Q3) Difference between Union and union all
+select manager_id from emp
+union -- it give a unique value
+select manager_id from emp2
+-------------------
+
+select manager_id from emp
+union all -- it give all recorded unique and duplicated
+select manager_id from emp2
+
+Q4)Different Between rank,row_number and dense_rank
+
+
+
+Q5)Employees who are not present in deparment table
+
+select emp.*,dept.dept_id,dept.dep_name
+from emp e
+left join dept d on e.department_id=d.dep_id
+where d.dep_name is null
+
+Q6)Second Highest Salary in each Dep
+
+select * from 
+(select emp.*,rank() Over(partition by department_id order by salary desc) asrn
+from emp)
+where rn=2
+
+Q7) Find all transaction done by shilpa
+
+select * from orders where upper(customer_name)='SHILPA'
+
+Q8) Self Join ,Manger salary >emp Salary
+
+Q9)joins left /inner join
+
+Q10) update Query to swap gender
+ 
+
